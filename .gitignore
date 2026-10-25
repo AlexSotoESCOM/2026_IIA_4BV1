@@ -1,0 +1,10 @@
+# Configuración  de code
+.vscode/
+
+# Archivos de entorno con contraseñas de bases de datos
+.env
+config.local.php
+
+# Archivos del sistema operativo
+.DS_Store
+Thumbs.db

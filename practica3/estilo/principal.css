@@ -1,0 +1,149 @@
+:root{
+--primarioColor:#ECFCFF;
+--secundarioColor:#B2FCFF;
+--fondoColor:#5EDFFF;
+--resaltadoColor:#3E64FF;
+--textoColor:#4e68d2;
+}
+
+
+body{
+    font-weight: 100;
+    font-size: 16pt;
+    background: #96c6d9;
+    background: linear-gradient(122deg,rgba(150, 198, 217, 1) 0%,
+     rgba(122, 198, 179, 1) 20%,
+      rgba(87, 94, 199, 1) 30%,
+       rgba(83, 229, 237, 1) 69%);
+}
+
+a{
+    border-radius: 5%;
+    display: inline-block;
+    padding: 6px 12px; 
+    transition: all 0.3s ease; 
+}
+
+a:link{
+    color: var(--textoColor);
+    font-size: 1.1rem;
+    background-color: var(--primarioColor);
+    height: 1.2rem;
+}
+
+a:visited{
+    color: var(--resaltadoColor);
+    font-size: 1.1rem
+}
+
+a:hover{
+    color: var(--primarioColor);
+    /*font-size: 1.5rem;*/
+    background-color: var(--resaltadoColor);
+    transform: scale(1.15);  
+}
+
+
+
+
+main,footer,nav,header{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-content: center;
+}
+
+header{
+    min-height: 55vh;
+    background-image:url("../imagenes/fondo.jpg") ;
+    background-repeat: no-repeat;
+    background-position: bottom left;
+    background-size:cover;
+    flex-direction: row;
+    justify-content:center;
+    align-content:flex-start;
+}
+
+.bannerPortada{
+    width: 80%;
+    /*border: #3E64FF 1px solid; */
+    box-sizing: content-box;    
+    min-height: 100vh;
+    
+}   
+
+section{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: stretch;
+    row-gap: 8px;
+    align-content: center;
+}
+
+article{
+    width: 45%;
+    max-width: 700px;  
+    min-width: 300px;      
+    min-height:45vh;
+    background-color: var(--primarioColor);
+    border-radius: 5px;
+    padding: 8px;
+    margin-bottom: 3px;
+    container-type: inline-size; 
+    
+}
+
+article:nth-child(3){
+    width: 95%;
+    max-width: none; 
+}
+
+nav{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content:center;
+    column-gap: 35px;
+    align-items:center;
+    min-height: 8vh;
+    row-gap: 5px;
+
+}
+@media (max-width: 600px) {
+    nav {
+        flex-direction: column; 
+        justify-content: center;
+        align-items: center;
+        height: auto;           
+        padding: 15px 0;        
+    }
+}
+
+
+h1{
+    background-color: var(--resaltadoColor);
+    border-radius: 15px;
+    color: var(--secundarioColor);
+    width: 50%;
+    text-align: center;
+    min-width: 280px; /* 1. Evita que el fondo del h1 colapse en pantallas muy chicas */
+    padding: 10px 20px; 
+    font-size: clamp(1.5rem, 4vw, 2.8rem); 
+    
+}
+
+h3{
+    text-align: center;
+}
+article p{
+         font-size: clamp(1rem, 0.8rem + 1.5cqw, 1.35rem);
+
+     line-height: 1.5; 
+    margin-bottom: 1em;
+    text-align: justify;
+  
+}
