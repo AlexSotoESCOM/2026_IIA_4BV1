@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>IIA</title>
+    <link rel="stylesheet" href="../estilo/tabla.css">
     <?php
     // Ajustamos para llevar en la parte del arreglo el semestre
     $materias[0][0] = 1;
@@ -52,22 +53,109 @@
         9
     ];
 
-    // definimos la función
-    function imprimeDatosMat(array $datos)
-    {
-        // recibimos el arreglo
-        //        Inicializamos el renglón        
-        $totalMaterias = count($datos);
+    $materias[6] = [
+        4,
+        "Tecnologías para el desarrollo de aplicaciones Web",
+        "Desarrolla aplicaciones Web con base en las tecnologías HTML, XML, Java, JavaScript, AJAX, un framework JavaScript y la conexión a bases de datos.",
+        "Profesional",
+        7.5
+    ];
 
-        for ($j = 0; $j < $totalMaterias; $j++) {
+
+    // Ordenar de forma descendente (del semestre más bajo al más alto),
+    //    cambiamos los indices para poder usar el valor de contador
+    //    con for en enteros
+
+    /** 
+     * el uso del elemento de ordenamiento corresponde al índice del arreglo que queremos
+     * pasar 
+     * [0]-> semestre
+     * [1]->Nombre
+     * [2]->Propósito
+     * [3]->ärea de formación
+     * [4]->Créditos TEPIC 
+     */
+    /* Podemos ordenar el arreglo sin cambiar sus índices
+            usort($materias, function ($a, $b) {
+            return $a[0] <=> $b[0];
+            });
+        */
+
+
+    // definimos la función
+
+    function imprimeCabecera(int $semestre)
+    {
+        //recibe el número de semestre e imprime un renglón de cabecera            
+        echo "<tr><th colspan='5'> Semestre  " . $semestre . "</th></tr>";
+        echo "<tr>
+                <th>Semestre</th>
+                <th>Nombre</th>
+                <th>Propósito</th>
+                <th>Área de formación</th>
+                <th>Creditos TEPIC</th>
+                </tr>";
+        return $semestre;
+    }
+
+    function imprimeRengDatos(array $datosRenglones)
+    {
+        foreach ($datosRenglones as $key => $value) {
             echo "<tr>";
             for ($i = 0; $i < 5; $i++) {
-                echo "<td>" . $datos[$j][$i] . "</td>";
+                echo "<td>" . $value[$i] . "</td>";
             }
             // terminamos el renglón
             echo "</tr>";
         }
-        return $totalMaterias;
+        return 0;
+    }
+
+
+    function imprimeDatosMat(array $datos, int $semestre)
+    {
+        // recibimos el arreglo
+        //        Inicializamos el renglón 
+        // Contamos el número de materias que vienen en el arreglo       
+        $totalMaterias = count($datos);
+
+        //echo $totalMaterias;
+        //echo "<br>" . $semestre;
+
+        //separar las materias del semestre actual del arreglo    
+
+        $semestreActual = array_filter(
+            $datos,
+            function ($materia) use ($semestre) {
+                return $materia[0] == $semestre; // Conservar solo si el semestre es el actual
+            }
+        );
+
+        //print_r($semestreActual);
+        // total de materias del semestre actual
+        $totalSemMaterias = count($semestreActual);
+        //echo "<br>" . $totalSemMaterias;
+
+        // En caso de estar vacia la variable (no hay materias, no imprimir nada)
+
+        if ($totalSemMaterias > 0) {
+
+            imprimeCabecera($semestre);
+            imprimeRengDatos($semestreActual);
+        }
+        return 0;
+    }
+
+
+    function imprimirTablaCarrera(array $datosMaterias, int $semestresCarrera)
+    {
+        echo "<table>";
+        for ($n = 0; $n < $semestresCarrera; $n++) {
+            $resultado = imprimeDatosMat($datosMaterias, $n);
+        }
+
+        echo "</table>";
+        return 0;
     }
 
     ?>
@@ -84,25 +172,27 @@
         <section>
             <article>
                 <h3>Materias</h3>
-                <table>
-                    <tr>
-                        <th>Semestre</th>
-                        <th>Nombre</th>
-                        <th>Propósito</th>
-                        <th>Área de formación</th>
-                        <th>Creditos TEPIC</th>
-                    </tr>
+
 
                     <?php
-                    $resultado = imprimeDatosMat($materias);
-                    echo $resultado;
-                    // Se utiliza la función 
-
+                    //$respuestaSemestre=imprimeCabecera(4);
+                    //$resultado = imprimeDatosMat($materias,1);
+                    //$resultado = imprimeDatosMat($materias,2);
+                    //$resultado = imprimeDatosMat($materias,4);
+                    //echo $resultado;
+                    // Se utiliza la función  imprimeDatosMat
+                    // para cada semestre
+                   
+                    //for ($n = 0; $n < 9; $n++) {
+                    //    $resultado = imprimeDatosMat($materias, $n);
+                    //}
+                    imprimirTablaCarrera($materias,9);
                     ?>
 
-                </table>
             </article>
         </section>
+
+
     </main>
 </body>
 
